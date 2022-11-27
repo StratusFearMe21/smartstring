@@ -31,7 +31,7 @@ test = ["std", "arbitrary", "arbitrary/derive"]
 
 [dependencies]
 static_assertions = "1"
-serde = { version = "1", optional = true }
+serde = { version = "1", optional = true, features = ["derive"] }
 arbitrary = { version = "1", optional = true }
 proptest = { version = "1", optional = true }
 
