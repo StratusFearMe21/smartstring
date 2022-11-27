@@ -6,6 +6,7 @@ use crate::{boxed::BoxedString, inline::InlineString, SmartString};
 use alloc::string::String;
 use core::mem::{align_of, size_of};
 use static_assertions::{assert_eq_align, assert_eq_size, const_assert, const_assert_eq};
+use serde::{Deserialize, Serialize};
 
 /// A compact string representation equal to [`String`] in size with guaranteed inlining.
 ///
@@ -20,7 +21,7 @@ use static_assertions::{assert_eq_align, assert_eq_size, const_assert, const_ass
 ///
 /// This performs generally as well as [`String`] on all ops on boxed strings, and
 /// better than [`String`]s on inlined strings.
-#[derive(Debug)]
+#[derive(Debug, Deserialize, Serialize)]
 pub struct Compact;
 
 /// A representation similar to [`Compact`] but which doesn't re-inline strings.
@@ -33,7 +34,7 @@ pub struct Compact;
 /// variant you want - it won't allocate until the inline capacity is exceeded, and it
 /// also won't deallocate once allocation has occurred, which risks reallocation if the
 /// string exceeds its inline capacity in the future.
-#[derive(Debug)]
+#[derive(Debug, Deserialize, Serialize)]
 pub struct LazyCompact;
 
 /// Marker trait for [`SmartString`] representations.
